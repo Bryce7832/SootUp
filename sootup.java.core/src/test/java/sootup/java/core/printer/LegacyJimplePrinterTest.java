@@ -114,7 +114,7 @@ public class LegacyJimplePrinterTest {
               "return"),
           Utils.filterJimple(sw.toString()));
     }
-
+    //sw.close();
     {
       BranchingStmt lookupSwitch =
           new JSwitchStmt(IntConstant.getInstance(123), lookupValues, noPosInfo);
@@ -151,6 +151,7 @@ public class LegacyJimplePrinterTest {
               "return"),
           Utils.filterJimple(sw2.toString()));
     }
+    //sw2.close();
   }
 
   @Test
