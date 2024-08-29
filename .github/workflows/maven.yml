@@ -296,3 +296,22 @@ jobs:
           javadoc-branch: gh-pages
           java-version: 17
           target-folder: apidocs 
+
+  Resource-Leak-Checker:
+    needs: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Checker Framework
+        run:
+          curl -LO https://github.com/typetools/checker-framework/releases/download/checker-framework-3.33.0/checker-framework-3.33.0.zip
+          unzip checker-framework-3.33.0.zip
+
+      - name: Run Maven with Resource Leak Checker
+        run:
+          mvn clean compile \
+            -DskipTests \
+            -Pchecker \
+            -DcheckerFramework=checker-framework-3.33.0/checker \
+            -DcheckerFramework.checkers=org.checkerframework.checker.resourceleak.ResourceLeakChecker
