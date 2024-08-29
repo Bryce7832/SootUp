@@ -312,6 +312,6 @@ jobs:
         run: |
           mvn clean compile \
             -DskipTests \
-            -Pchecker \
-            -DcheckerFramework=checker-framework-3.33.0/checker \
-            -DcheckerFramework.checkers=org.checkerframework.checker.resourceleak.ResourceLeakChecker
+            -Dmaven.compiler.compilerArgument=-processor \
+            -Dmaven.compiler.compilerArgument=org.checkerframework.checker.resourceleak.ResourceLeakChecker \
+            -Dmaven.compiler.processorpath=checker-framework-3.33.0/checker
