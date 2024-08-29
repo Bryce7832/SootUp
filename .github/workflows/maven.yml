@@ -81,14 +81,14 @@ jobs:
           distribution: 'zulu'
 
       - name: Check Format
-        run: mvn -B com.coveo:fmt-maven-plugin:check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -P !checkerframework com.coveo:fmt-maven-plugin:check -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: License Headers
-        run: mvn -B org.codehaus.mojo:license-maven-plugin:check-file-header -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -P !checkerframework org.codehaus.mojo:license-maven-plugin:check-file-header -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       # create javadoc html to lint it
       - name: Check Javadoc
-        run: mvn -B javadoc:aggregate -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -P !checkerframework javadoc:aggregate -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
   JDK8:
     needs: Compilation
@@ -119,7 +119,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Test (JDK8)
-        run: mvn -am verify -B -Dfmt.skip -Dmaven.main.skip=true -PJava8 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -am verify -B -P !checkerframework -Dfmt.skip -Dmaven.main.skip=true -PJava8 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - uses: actions/upload-artifact@v3
         if: ${{ always() }}
@@ -165,7 +165,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Test (JDK9)
-        run: mvn -B -am verify -Dfmt.skip -Dmaven.main.skip=true -PJava9 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -am verify -Dfmt.skip -Dmaven.main.skip=true -P !checkerframework -PJava9 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - uses: actions/upload-artifact@v3
         if: ${{ always() }}
@@ -211,7 +211,7 @@ jobs:
             ${{ runner.os }}-maven-    
 
       - name: Test (IntegrationTest)
-        run: mvn -B -pl sootup.tests -am verify -Dfmt.skip -Dmaven.main.skip=true -PIntegrationTest -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -B -pl sootup.tests -am verify -Dfmt.skip -P !checkerframework -Dmaven.main.skip=true -PIntegrationTest -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - uses: actions/upload-artifact@v3
         if: ${{ always() }}
@@ -260,10 +260,10 @@ jobs:
           name: coverage-exec
 
       - name: merge coverage reports
-        run:  mvn -ntp jacoco:merge@merge-results  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run:  mvn -ntp jacoco:merge@merge-results -P !checkerframework -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: aggregate coverage reports across java versions
-        run: mvn -ntp jacoco:report-aggregate@generate-coverage-report  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        run: mvn -ntp jacoco:report-aggregate@generate-coverage-report -P !checkerframework -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: upload aggregated coverage artifact
         uses: actions/upload-artifact@v3
