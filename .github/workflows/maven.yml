@@ -302,16 +302,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Checker Framework
-        run: |
-          curl -LO https://github.com/typetools/checker-framework/releases/download/checker-framework-3.33.0/checker-framework-3.33.0.zip;
-          unzip checker-framework-3.33.0.zip
-
       - name: Run Maven with Resource Leak Checker
         run: |
           mvn clean compile \
-            -DskipTests \
-            -Dmaven.compiler.compilerArgument=-processor \
-            -Dmaven.compiler.compilerArgument=org.checkerframework.checker.resourceleak.ResourceLeakChecker \
-            -Dmaven.compiler.processorpath=checker-framework-3.33.0/checker
+            -P checkerframework

@@ -219,6 +219,7 @@
             <id>checkerframework</id>
             <!-- If you omit the activation block, run mvn with "-P checkerframework" to run checkers. -->
             <activation>
+                <activeByDefault>false</activeByDefault>
                 <jdk>[1.8,)</jdk>
             </activation>
             <build>
@@ -255,6 +256,7 @@
         <profile>
             <id>checkerframework-jdk8</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
                 <jdk>1.8</jdk>
             </activation>
             <!-- using github.com/google/error-prone-javac is required when running on JDK 8 -->
@@ -298,6 +300,7 @@
         <profile>
             <id>checkerframework-jdk9orlater</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
                 <jdk>[9,)</jdk>
             </activation>
             <build>
