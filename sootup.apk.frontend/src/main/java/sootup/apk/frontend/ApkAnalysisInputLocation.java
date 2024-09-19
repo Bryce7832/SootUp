@@ -106,7 +106,7 @@ public class ApkAnalysisInputLocation implements AnalysisInputLocation {
   @Override
   public Collection<? extends SootClassSource> getClassSources(@Nonnull View view) {
     return classNamesList.entrySet().stream()
-        .flatMap(
+        .<SootClassSource>flatMap(
             className ->
                 StreamUtils.optionalToStream(
                     getClassSource(
