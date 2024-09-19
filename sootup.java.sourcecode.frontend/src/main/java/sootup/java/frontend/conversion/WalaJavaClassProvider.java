@@ -208,7 +208,6 @@ public class WalaJavaClassProvider implements ClassProvider {
       // add standard libraries to scope
       String[] stdlibs = WalaProperties.getJ2SEJarFiles();
       for (String stdlib : stdlibs) {
-
         scope.addToScope(ClassLoaderReference.Primordial, new JarFile(stdlib));
       }
     } catch (IOException e) {
@@ -338,7 +337,6 @@ public class WalaJavaClassProvider implements ClassProvider {
     if (exclusionFilePath == null) {
       return;
     }
-
     File exclusionFile = new File(exclusionFilePath);
     if (exclusionFile.isFile()) {
       FileOfClasses classes;
