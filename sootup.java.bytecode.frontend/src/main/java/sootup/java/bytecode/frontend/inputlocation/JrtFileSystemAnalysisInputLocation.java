@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import org.apache.commons.io.FilenameUtils;
 import sootup.core.IdentifierFactory;
 import sootup.core.frontend.ClassProvider;
+import sootup.core.frontend.SootClassSource;
 import sootup.core.frontend.ResolveException;
 import sootup.core.inputlocation.AnalysisInputLocation;
 import sootup.core.model.SourceType;
@@ -149,9 +150,8 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
             + classProvider.getHandledFileType().getExtensionWithDot();
 
     final Path archiveRoot = theFileSystem.getPath("modules", moduleSignature.getModuleName());
-    try {
-
-      return Files.walk(archiveRoot)
+    try(Stream<Path> paths = Files.walk(archiveRoot)){
+      return paths
           .filter(
               filePath ->
                   !Files.isDirectory(filePath)
@@ -159,7 +159,7 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
                           .toString()
                           .endsWith(classProvider.getHandledFileType().getExtensionWithDot())
                       && !filePath.toString().endsWith(moduleInfoFilename))
-          .flatMap(
+          .<SootClassSource>flatMap(
               p ->
                   StreamUtils.optionalToStream(
                       classProvider.createClassSource(this, p, fromPath(p, identifierFactory))))
