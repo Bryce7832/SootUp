@@ -170,7 +170,7 @@ public abstract class PathBasedAnalysisInputLocation implements AnalysisInputLoc
                       && !filePath.toString().endsWith(moduleInfoFilename)
                       && ignoredPaths.stream()
                           .noneMatch(p -> filePath.toString().startsWith(p.toString())))
-          .flatMap(
+          .<SootClassSource>flatMap(
               p -> {
                 final String fullyQualifiedName = fromPath(dirPath, p);
 

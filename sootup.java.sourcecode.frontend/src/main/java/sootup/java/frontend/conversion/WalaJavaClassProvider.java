@@ -108,14 +108,14 @@ public class WalaJavaClassProvider implements ClassProvider {
       scope.addToScope(
           JavaSourceAnalysisScope.SOURCE, new SourceDirectoryTreeModule(new File(path)));
     }
-    try {
-      // add Jars to scope
-      for (String libJar : libPath) {
-        scope.addToScope(ClassLoaderReference.Primordial, new JarFile(libJar));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      // add Jars to scope
+//      for (String libJar : libPath) {
+//        scope.addToScope(ClassLoaderReference.Primordial, new JarFile(libJar));
+//      }
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
     setExclusions(exclusionFilePath);
     factory = new ECJClassLoaderFactory(scope.getExclusions());
   }
@@ -128,22 +128,22 @@ public class WalaJavaClassProvider implements ClassProvider {
     addScopesForJava();
     this.sourcePath = sourcePath;
     this.sourceType = SourceType.Application;
-    try {
-      // add the source directory to scope
-      for (String path : sourcePath) {
-        scope.addToScope(
-            JavaSourceAnalysisScope.SOURCE, new SourceDirectoryTreeModule(new File(path)));
-      }
-      scope.setLoaderImpl(
-          ClassLoaderReference.Application, "com.ibm.wala.dalvik.classLoader.WDexClassLoaderImpl");
-      // add androidJar and apkPath to scope
-      scope.addToScope(ClassLoaderReference.Primordial, new JarFile(androidJar));
-      scope.addToScope(ClassLoaderReference.Application, DexFileModule.make(new File(apkPath)));
-      setExclusions(exclusionFilePath);
-      factory = new ECJClassLoaderFactory(scope.getExclusions());
-    } catch (IllegalArgumentException | IOException e) {
-      throw new RuntimeException("Failed to construct frontend.WalaJavaClassProvider", e);
-    }
+//    try {
+//      // add the source directory to scope
+//      for (String path : sourcePath) {
+//        scope.addToScope(
+//            JavaSourceAnalysisScope.SOURCE, new SourceDirectoryTreeModule(new File(path)));
+//      }
+//      scope.setLoaderImpl(
+//          ClassLoaderReference.Application, "com.ibm.wala.dalvik.classLoader.WDexClassLoaderImpl");
+//      // add androidJar and apkPath to scope
+//      scope.addToScope(ClassLoaderReference.Primordial, new JarFile(andriodJar));
+//      scope.addToScope(ClassLoaderReference.Application, DexFileModule.make(new File(apkPath)));
+//      setExclusions(exclusionFilePath);
+//      factory = new ECJClassLoaderFactory(scope.getExclusions());
+//    } catch (IllegalArgumentException | IOException e) {
+//      throw new RuntimeException("Failed to construct frontend.WalaJavaClassProvider", e);
+//    }
   }
 
   /**
@@ -201,16 +201,15 @@ public class WalaJavaClassProvider implements ClassProvider {
     // disable System.err messages generated from eclipse jdt
     System.setProperty("wala.jdt.quiet", "true");
     scope = new JavaSourceAnalysisScope();
-    try {
-      // add standard libraries to scope
-      String[] stdlibs = WalaProperties.getJ2SEJarFiles();
-      for (String stdlib : stdlibs) {
-
-        scope.addToScope(ClassLoaderReference.Primordial, new JarFile(stdlib));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      // add standard libraries to scope
+//      String[] stdlibs = WalaProperties.getJ2SEJarFiles();
+//      for (String stdlib : stdlibs) {
+//        scope.addToScope(ClassLoaderReference.Primordial, new JarFile(stdlib));
+//      }
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 
   /** Use WALA's JAVA source code front-end to build class hierarchy. */
@@ -335,19 +334,19 @@ public class WalaJavaClassProvider implements ClassProvider {
       return;
     }
 
-    File exclusionFile = new File(exclusionFilePath);
-    if (exclusionFile.isFile()) {
-      FileOfClasses classes;
-      try {
-        classes = new FileOfClasses(Files.newInputStream(exclusionFile.toPath()));
-        scope.setExclusions(classes);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    } else {
-      throw new ResolveException(
-          "the given path to the exclusion file does not point to a file.", exclusionFile.toPath());
-    }
+//    File exclusionFile = new File(exclusionFilePath);
+//    if (exclusionFile.isFile()) {
+//      FileOfClasses classes;
+//      try {
+//        classes = new FileOfClasses(Files.newInputStream(exclusionFile.toPath()));
+//        scope.setExclusions(classes);
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }
+//    } else {
+//      throw new ResolveException(
+//          "the given path to the exclusion file does not point to a file.", exclusionFile.toPath());
+//    }
   }
 
   @Override
