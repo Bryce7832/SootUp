@@ -218,10 +218,10 @@
         <profile>
             <id>checkerframework</id>
             <!-- If you omit the activation block, run mvn with "-P checkerframework" to run checkers. -->
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <jdk>[1.8,)</jdk>
-            </activation>
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--                <jdk>[1.8,)</jdk>-->
+<!--            </activation>-->
             <build>
                 <plugins>
                     <plugin>
