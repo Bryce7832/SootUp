@@ -95,8 +95,8 @@ public class LegacyJimplePrinterTest {
       SootClass tableClass = buildClass(builder);
 
       StringWriter sw = new StringWriter();
-      //      new JimplePrinter(JimplePrinter.Option.LegacyMode)
-      //          .printTo(tableClass, new PrintWriter(new EscapedWriter(sw)));
+            new JimplePrinter(JimplePrinter.Option.LegacyMode)
+                .printTo(tableClass, new PrintWriter(new EscapedWriter(sw)));
 
       assertEquals(
           Arrays.asList(
@@ -113,7 +113,6 @@ public class LegacyJimplePrinterTest {
               "return"),
           Utils.filterJimple(sw.toString()));
     }
-    // sw.close();
     {
       BranchingStmt lookupSwitch =
           new JSwitchStmt(IntConstant.getInstance(123), lookupValues, noPosInfo);
@@ -132,8 +131,8 @@ public class LegacyJimplePrinterTest {
       SootClass lookupClass = buildClass(builder);
 
       StringWriter sw2 = new StringWriter();
-      //      new JimplePrinter(JimplePrinter.Option.LegacyMode)
-      //          .printTo(lookupClass, new PrintWriter(new EscapedWriter(sw2)));
+            new JimplePrinter(JimplePrinter.Option.LegacyMode)
+                .printTo(lookupClass, new PrintWriter(new EscapedWriter(sw2)));
 
       assertEquals(
           Arrays.asList(
@@ -150,7 +149,6 @@ public class LegacyJimplePrinterTest {
               "return"),
           Utils.filterJimple(sw2.toString()));
     }
-    // sw2.close();
   }
 
   @Test
