@@ -655,6 +655,7 @@ public abstract class StmtGraph<V extends BasicBlock<V>> implements Iterable<Stm
     }
 
     @Override
+    @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
     public boolean hasNext() {
       final boolean hasIteratorMoreElements;
       BasicBlock<?> b = retrieveNextBlock();
@@ -676,7 +677,7 @@ public abstract class StmtGraph<V extends BasicBlock<V>> implements Iterable<Stm
           String info =
               blocks.stream()
                   .filter(n -> !iteratedBlocks.contains(n))
-                  // .map(BasicBlock::getStmts)
+                  .map(BasicBlock::getStmts)
                   .collect(Collectors.toList())
                   .toString();
           throw new IllegalStateException(
