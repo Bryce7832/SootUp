@@ -655,7 +655,7 @@ public abstract class StmtGraph<V extends BasicBlock<V>> implements Iterable<Stm
     }
 
     @Override
-    @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+    @SuppressWarnings("all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
     public boolean hasNext() {
       final boolean hasIteratorMoreElements;
       BasicBlock<?> b = retrieveNextBlock();
