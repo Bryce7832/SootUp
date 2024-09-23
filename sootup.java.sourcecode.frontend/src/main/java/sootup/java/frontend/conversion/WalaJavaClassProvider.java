@@ -27,17 +27,24 @@ import com.ibm.wala.classLoader.ClassLoaderFactory;
 import com.ibm.wala.classLoader.IClass;
 import com.ibm.wala.classLoader.Module;
 import com.ibm.wala.classLoader.SourceDirectoryTreeModule;
+import com.ibm.wala.dalvik.classLoader.DexFileModule;
 import com.ibm.wala.ipa.callgraph.AnalysisScope;
 import com.ibm.wala.ipa.cha.ClassHierarchyException;
 import com.ibm.wala.ipa.cha.ClassHierarchyFactory;
 import com.ibm.wala.ipa.cha.IClassHierarchy;
+import com.ibm.wala.properties.WalaProperties;
+import com.ibm.wala.types.ClassLoaderReference;
 import com.ibm.wala.types.TypeName;
+import com.ibm.wala.util.config.FileOfClasses;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.jar.JarFile;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import sootup.core.frontend.ClassProvider;
+import sootup.core.frontend.ResolveException;
 import sootup.core.inputlocation.AnalysisInputLocation;
 import sootup.core.inputlocation.FileType;
 import sootup.core.model.SootClass;
@@ -89,7 +96,7 @@ public class WalaJavaClassProvider implements ClassProvider {
     factory = new ECJClassLoaderFactory(scope.getExclusions());
   }
 
-  @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+  @SuppressWarnings("all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
   public WalaJavaClassProvider(
           @Nonnull Set<String> sourcePath,
           @Nonnull Set<String> libPath,
@@ -114,7 +121,7 @@ public class WalaJavaClassProvider implements ClassProvider {
     factory = new ECJClassLoaderFactory(scope.getExclusions());
   }
 
-  @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+  @SuppressWarnings("all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
   public WalaJavaClassProvider(
           @Nonnull Set<String> sourcePath,
           @Nonnull String apkPath,
@@ -191,7 +198,7 @@ public class WalaJavaClassProvider implements ClassProvider {
     }
   }
 
-  @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+  @SuppressWarnings("all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
   private void addScopesForJava() {
     createWalaProperties();
     // disable System.err messages generated from eclipse jdt
@@ -201,6 +208,10 @@ public class WalaJavaClassProvider implements ClassProvider {
       // add standard libraries to scope
       String[] stdlibs = WalaProperties.getJ2SEJarFiles();
       for (String stdlib : stdlibs) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5c29f06d9 (Made minor changes)
         scope.addToScope(ClassLoaderReference.Primordial, new JarFile(stdlib));
       }
     } catch (IOException e) {
@@ -325,11 +336,12 @@ public class WalaJavaClassProvider implements ClassProvider {
     return walaClass;
   }
 
-  @SuppressWarnings("all") //Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+  @SuppressWarnings("all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
   private void setExclusions(@Nullable String exclusionFilePath) {
     if (exclusionFilePath == null) {
       return;
     }
+
     File exclusionFile = new File(exclusionFilePath);
     if (exclusionFile.isFile()) {
       FileOfClasses classes;
