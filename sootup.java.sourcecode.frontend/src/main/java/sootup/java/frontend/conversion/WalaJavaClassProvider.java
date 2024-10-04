@@ -208,10 +208,6 @@ public class WalaJavaClassProvider implements ClassProvider {
       // add standard libraries to scope
       String[] stdlibs = WalaProperties.getJ2SEJarFiles();
       for (String stdlib : stdlibs) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 5c29f06d9 (Made minor changes)
         scope.addToScope(ClassLoaderReference.Primordial, new JarFile(stdlib));
       }
     } catch (IOException e) {
