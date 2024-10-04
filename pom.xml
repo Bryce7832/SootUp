@@ -114,7 +114,7 @@
                                 <path>
                                     <groupId>org.checkerframework</groupId>
                                     <artifactId>checker</artifactId>
-                                    <version>3.46.0</version>
+                                    <version>3.48.0</version>
                                 </path>
                             </annotationProcessorPaths>
                             <annotationProcessors>
@@ -478,7 +478,7 @@
         <dependency>
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
-            <version>3.46.0</version>
+            <version>3.48.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
