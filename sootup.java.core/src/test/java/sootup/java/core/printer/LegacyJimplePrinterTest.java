@@ -20,6 +20,7 @@ import sootup.core.jimple.common.stmt.JReturnVoidStmt;
 import sootup.core.jimple.javabytecode.stmt.JSwitchStmt;
 import sootup.core.model.*;
 import sootup.core.signatures.MethodSignature;
+import sootup.core.util.EscapedWriter;
 import sootup.core.util.Utils;
 import sootup.core.util.printer.JimplePrinter;
 import sootup.core.views.View;
