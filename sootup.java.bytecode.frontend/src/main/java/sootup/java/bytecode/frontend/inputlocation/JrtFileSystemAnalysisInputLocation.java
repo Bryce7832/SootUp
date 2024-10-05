@@ -150,7 +150,8 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
             + classProvider.getHandledFileType().getExtensionWithDot();
 
     final Path archiveRoot = theFileSystem.getPath("modules", moduleSignature.getModuleName());
-    try (Stream<Path> paths = Files.walk(archiveRoot)){
+    try (Stream<Path> paths = Files.walk(archiveRoot)) {
+      // collect into a list and then return a stream, so we do not leak the Stream returned by Files.walk
       List<JavaSootClassSource> javaSootClassSources = paths
               .filter(
                       filePath ->
