@@ -1,0 +1,2 @@
+jar_name,exception,failedMethodSignature,download_url
+Utilities-1.48.jar,Failed to apply sootup.interceptors.NopEliminator@7469d13a to <dorkbox.util.FileUtil: java.util.List readLines(java.io.Reader)>,"<dorkbox.util.FileUtil: java.util.List readLines(java.io.Reader)>",https://repo1.maven.org/maven2/com/dorkbox/Utilities/1.48/Utilities-1.48.jar
