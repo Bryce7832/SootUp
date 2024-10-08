@@ -25,6 +25,7 @@ package sootup.core.util;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
+import org.checkerframework.checker.mustcall.qual.MustCallAlias;
 
 /**
  * A FilterWriter which catches to-be-escaped characters (<code>\\unnnn</code>) in the input and
@@ -38,6 +39,7 @@ public class EscapedWriter extends FilterWriter {
   private final int lf = (lineSeparator.length() == 2) ? lineSeparator.charAt(1) : -1;
 
   /** Constructs an EscapedWriter around the given Writer. */
+  @MustCallAlias
   public EscapedWriter(Writer fos) {
     super(fos);
   }
