@@ -97,7 +97,7 @@ public class LegacyJimplePrinterTest {
 
       StringWriter sw = new StringWriter();
       new JimplePrinter(JimplePrinter.Option.LegacyMode)
-              .printTo(tableClass, new PrintWriter(new EscapedWriter(sw)));
+          .printTo(tableClass, new PrintWriter(new EscapedWriter(sw)));
       assertEquals(
           Arrays.asList(
               "public static void main()",
@@ -132,7 +132,7 @@ public class LegacyJimplePrinterTest {
 
       StringWriter sw2 = new StringWriter();
       new JimplePrinter(JimplePrinter.Option.LegacyMode)
-              .printTo(lookupClass, new PrintWriter(new EscapedWriter(sw2)));
+          .printTo(lookupClass, new PrintWriter(new EscapedWriter(sw2)));
 
       assertEquals(
           Arrays.asList(
