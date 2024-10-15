@@ -123,7 +123,7 @@ public class WalaJavaClassProvider implements ClassProvider {
   }
 
   @SuppressWarnings(
-"all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
+      "all") // Suppressed warning flagged from Resource Leak Checker. Currently being investigated.
   public WalaJavaClassProvider(
       @Nonnull Set<String> sourcePath,
       @Nonnull String apkPath,
