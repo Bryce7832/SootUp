@@ -23,14 +23,16 @@ import qilin.microben.utils.Assert;
 
 public class SystemIn {
   public static void main(String[] args) {
+    try(
     InputStream in =
         new InputStream() {
           @Override
           public int read() {
             return 0;
           }
-        };
+        }){
     System.setIn(in);
     Assert.mayAlias(in, System.in);
+        }
   }
 }
