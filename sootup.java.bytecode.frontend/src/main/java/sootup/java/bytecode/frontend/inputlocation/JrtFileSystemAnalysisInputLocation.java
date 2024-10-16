@@ -192,7 +192,7 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
           .flatMap(sig -> getClassSourcesInternal(sig, view.getIdentifierFactory(), view))){
           return sourceStream.collect(Collectors.toList());
         } catch (IOException e) {
-        throw new ResolveException("Error loading module " + moduleSignature, e);
+        throw new ResolveException("Error loading module " + moduleSignatures, e);
     }
   }
 
