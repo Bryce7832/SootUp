@@ -133,15 +133,18 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
   @Nonnull
   public Collection<JavaSootClassSource> getModulesClassSources(
       @Nonnull ModuleSignature moduleSignature, @Nonnull View view) {
-    return getClassSourcesInternal(moduleSignature, view.getIdentifierFactory(), view)
-        .collect(Collectors.toList());
+      try(Stream<JavaSootClassSource> classSource = getClassSourcesInternal(moduleSignature, view.getIdentifierFactory(), view)){
+        return classSource.collect(Collectors.toList());
+      } catch (IOException e) {
+        throw new ResolveException("Error loading module " + moduleSignature, e);
+    }
   }
 
   @Nonnull
   protected Stream<JavaSootClassSource> getClassSourcesInternal(
       @Nonnull ModuleSignature moduleSignature,
       @Nonnull IdentifierFactory identifierFactory,
-      @Nonnull View view) {
+      @Nonnull View view) throws IOException {
 
     ClassProvider classProvider = getClassProvider(view);
 
@@ -185,9 +188,12 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
   public @Nonnull Collection<JavaSootClassSource> getClassSources(@Nonnull View view) {
 
     Collection<ModuleSignature> moduleSignatures = discoverModules();
-    return moduleSignatures.stream()
-        .flatMap(sig -> getClassSourcesInternal(sig, view.getIdentifierFactory(), view))
-        .collect(Collectors.toList());
+    try(Stream<JavaSootClassSource> sourceStream = moduleSignatures.stream()
+          .flatMap(sig -> getClassSourcesInternal(sig, view.getIdentifierFactory(), view))){
+          return sourceStream.collect(Collectors.toList());
+        } catch (IOException e) {
+        throw new ResolveException("Error loading module " + moduleSignature, e);
+    }
   }
 
   /**
