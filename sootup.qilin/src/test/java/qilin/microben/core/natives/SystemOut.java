@@ -24,9 +24,9 @@ import qilin.microben.utils.Assert;
 
 public class SystemOut {
   public static void main(String[] args) throws FileNotFoundException {
-    try(PrintStream out = new PrintStream("")){
-    System.setOut(out);
-    Assert.mayAlias(out, System.out);
+    try (PrintStream out = new PrintStream("")) {
+      System.setOut(out);
+      Assert.mayAlias(out, System.out);
     }
   }
 }
