@@ -133,9 +133,8 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
   @Nonnull
   public Collection<JavaSootClassSource> getModulesClassSources(
       @Nonnull ModuleSignature moduleSignature, @Nonnull View view) {
-      try(Stream<JavaSootClassSource> classSourcesInternal = getClassSourcesInternal(moduleSignature, view.getIdentifierFactory(), view)){
-        return classSourcesInternal.collect(Collectors.toList());
-      }
+    return getClassSourcesInternal(moduleSignature, view.getIdentifierFactory(), view)
+        .collect(Collectors.toList());
   }
 
   @Nonnull
@@ -186,13 +185,9 @@ public class JrtFileSystemAnalysisInputLocation implements ModuleInfoAnalysisInp
   public @Nonnull Collection<JavaSootClassSource> getClassSources(@Nonnull View view) {
 
     Collection<ModuleSignature> moduleSignatures = discoverModules();
-    Collection<JavaSootClassSource> classSources = new ArrayList<>();
-    for (ModuleSignature sig : moduleSignatures) {
-      try(Stream<JavaSootClassSource> classSourcesInternal = getClassSourcesInternal(sig, view.getIdentifierFactory(), view)){
-        classSourcesInternal.forEach(classSources::add);
-      }
-    }
-    return classSources; 
+    return moduleSignatures.stream()
+        .flatMap(sig -> getClassSourcesInternal(sig, view.getIdentifierFactory(), view))
+        .collect(Collectors.toList());
   }
 
   /**
