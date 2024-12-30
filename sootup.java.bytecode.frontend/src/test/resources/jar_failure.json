@@ -1,0 +1,14 @@
+[
+{
+  "jar_name": "browserstack-javaagent-1.0.0.jar",
+  "exception": "Failed to apply sootup.interceptors.NopEliminator@4c843a4f to <junit.framework.TestCase: void runBare()>",
+  "download_url": "https://repo1.maven.org/maven2/com/browserstack/browserstack-javaagent/1.0.0/browserstack-javaagent-1.0.0.jar",
+  "failedMethodSignature": "<junit.framework.TestCase: void runBare()>"
+},
+{
+  "jar_name": "corda-node-api-5.0.0-DevPreview.jar",
+  "exception": "Failed to apply sootup.interceptors.NopEliminator@6a75a9e4 to <net.corda.nodeapi.internal.protonwrapper.engine.ConnectionStateMachine: void transportProcessInput(io.netty.buffer.ByteBuf)>",
+  "download_url": "https://repo1.maven.org/maven2/net/corda/corda-node-api/5.0.0-DevPreview/corda-node-api-5.0.0-DevPreview.jar",
+  "failedMethodSignature": "<net.corda.nodeapi.internal.protonwrapper.engine.ConnectionStateMachine: void transportProcessInput(io.netty.buffer.ByteBuf)>"
+}
+]
